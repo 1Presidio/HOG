@@ -1,0 +1,28 @@
+cmake_minimum_required(VERSION 2.8)
+
+# Define project name
+# eigen and boost
+project(HOG)
+
+# Set output directory
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_HOME_DIRECTORY}/bin)
+
+# include dependencies
+find_package(OpenCV 3 REQUIRED)
+find_package (glog 0.3.5)
+
+# add dependency directories
+include_directories(${OpenCV_INCLUDE_DIRS})
+
+# link dependency directories
+link_directories(${OpenCV_LIBRARY_DIRS})
+
+# executable output and location
+add_executable(hog src/hog.cc)
+
+# target the link libraries
+target_link_libraries(hog ${OpenCV_LIBS})
+target_link_libraries(hog tcmalloc)
+target_link_libraries (hog glog)
+
+set(CMAKE_CXX_FLAGS "-g -O0 -std=c++11")
